@@ -1,0 +1,15 @@
+.home_container {
+  width: 90vw;
+  margin: auto;
+}
+
+.trending_title {
+  text-align: center;
+}
+
+.home_media_container {
+  display:flex;
+  overflow: scroll;
+  height: 400px;
+  margin: auto;
+}
