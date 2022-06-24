@@ -16,6 +16,10 @@
   text-decoration: none;
 }
 
+.person_container:visited {
+  color: black;
+}
+
 .person_image {
   width: 150px;
   height: 225px;
