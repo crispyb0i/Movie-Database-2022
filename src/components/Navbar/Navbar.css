@@ -1,0 +1,26 @@
+.navbar_container {
+  display: flex;
+  list-style-type: none;
+  background-color: black;
+  color: white;
+  height: 50px;
+}
+
+.navbar_item {
+  margin: auto 20px;
+}
+
+.navbar_items_left {
+  display: flex;
+  width: 50%;
+}
+
+.navbar_items_right {
+  display: flex;
+  justify-content:flex-end;
+  width: 50%;
+}
+
+.navbar_container logo {
+  color: red;
+}

@@ -1,0 +1,26 @@
+.person_container {
+  height: 350px;
+  width: 150px;
+  margin-right: 15px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  transition: all 1s;
+}
+
+.person_container:hover {
+  transform: scale(1.05);
+}
+
+.person_container:link {
+  color: black;
+  text-decoration: none;
+}
+
+.person_image {
+  width: 150px;
+  height: 225px;
+}
+
+.person_text_container {
+  padding: 5px;
+}

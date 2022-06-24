@@ -1,17 +1,22 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
+import Media from "./pages/Media/Media";
+import Navbar from "./components/Navbar/Navbar";
+import Person from "./pages/Person/Person";
 
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />}>
-          {/* <Route index element={<Home />} />
+        <Route exact path="/" element={<Home />} />
+        <Route path="/:mediaType/:mediaID" element={<Media />} />
+        <Route path="/person/:personID" element={<Person />} />
+        {/* <Route index element={<Home />} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
           <Route path="*" element={<NoPage />} /> */}
-        </Route>
       </Routes>
     </BrowserRouter>
   );

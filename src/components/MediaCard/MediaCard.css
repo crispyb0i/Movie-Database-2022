@@ -4,8 +4,14 @@
 }
 
 .media_card_image {
-  height: 300px;
-  border-radius: 10px;
+  height: 280px;
+  border-radius: 20px;
+  margin-top: 10px;
+  transition: all 1s;
+}
+
+.media_card_image:hover {
+  transform: scale(1.05);
 }
 
 .media_card_title {
