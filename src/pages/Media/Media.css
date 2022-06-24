@@ -10,6 +10,7 @@
   width: 100%;
   height: 400px;
   overflow-x: scroll;
+  padding: 0 5px;
 }
 
 .media_info {
