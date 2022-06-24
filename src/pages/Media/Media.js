@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
-  fetchMovieByID,
-  fetchMovieTrailersByID,
-  fetchMovieCreditsByID,
-  fetchTVCreditsByID,
-  fetchShowByID,
-  BASE_IMAGE_URL,
-  BACKDROP_URL,
+	fetchMovieByID,
+	fetchMovieTrailersByID,
+	fetchMovieCreditsByID,
+	fetchTVCreditsByID,
+	fetchShowByID,
+	BASE_IMAGE_URL,
+	BACKDROP_URL
 } from "../../api/OnlineMovieDatabaseAPI";
 import "./Media.css";
 import { SiImdb } from "react-icons/si";
@@ -15,113 +15,112 @@ import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import PersonCard from "../../components/PersonCard/PersonCard";
 
 const Media = (props) => {
-  const { mediaType, mediaID } = useParams();
-  const [media, setMedia] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [movieVideos, setMovieVideos] = useState([]);
+	const { mediaType, mediaID } = useParams();
+	const [media, setMedia] = useState({});
+	const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (mediaType === "movie") {
-      fetchMovieByID(mediaID)
-        .then((data) => setMedia(data))
-        .then(() => fetchMovieTrailersByID(mediaID))
-        .then((data) =>
-          setMedia((prevState) => ({ ...prevState, movieVideos: data.results }))
-        )
-        .then(() => fetchMovieCreditsByID(mediaID))
-        .then((data) =>
-          setMedia((prevState) => ({ ...prevState, credits: data.cast }))
-        )
-        .then(() => setLoading(false));
-    }
+	useEffect(() => {
+		if (mediaType === "movie") {
+			fetchMovieByID(mediaID)
+				.then((data) => setMedia(data))
+				.then(() => fetchMovieTrailersByID(mediaID))
+				.then((data) =>
+					setMedia((prevState) => ({ ...prevState, movieVideos: data.results }))
+				)
+				.then(() => fetchMovieCreditsByID(mediaID))
+				.then((data) =>
+					setMedia((prevState) => ({ ...prevState, credits: data.cast }))
+				)
+				.then(() => setLoading(false));
+		}
 
-    if (mediaType === "tv")
-      fetchShowByID(mediaID)
-        .then((data) => setMedia(data))
-        .then(() => fetchTVCreditsByID(mediaID))
-        .then((data) =>
-          setMedia((prevState) => ({ ...prevState, credits: data.cast }))
-        )
-        .then(() => setLoading(false));
-  }, []);
+		if (mediaType === "tv")
+			fetchShowByID(mediaID)
+				.then((data) => setMedia(data))
+				.then(() => fetchTVCreditsByID(mediaID))
+				.then((data) =>
+					setMedia((prevState) => ({ ...prevState, credits: data.cast }))
+				)
+				.then(() => setLoading(false));
+	}, []);
 
-  console.log(media);
+	console.log(media);
 
-  const {
-    poster_path,
-    title,
-    name,
-    imdb_id,
-    overview,
-    release_date,
-    runtime,
-    tagline,
-    backdrop_path,
-    genres,
-  } = media;
+	const {
+		poster_path,
+		title,
+		name,
+		imdb_id,
+		overview,
+		release_date,
+		runtime,
+		tagline,
+		backdrop_path,
+		genres
+	} = media;
 
-  return (
-    <>
-      {loading ? (
-        <h1>LOADING...</h1>
-      ) : (
-        <>
-          <div
-            className="media_info"
-            style={
-              !loading && {
-                backgroundImage: `linear-gradient(0deg, rgba(255 255 255 / 94%), rgba(255 0 150 / 69%)), url(${BACKDROP_URL}${backdrop_path})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-              }
-            }
-          >
-            <img
-              src={`${BASE_IMAGE_URL}${poster_path}`}
-              alt={title}
-              className="media_poster"
-            />
-            <div className="media_info_text">
-              <h1>{`${title || name}`}</h1>
-              {genres &&
-                genres.map((genre) => <span>{` ${genre.name} `}</span>)}
-              <span>- {runtime} minutes</span>
-              <h4>
-                <em>{tagline}</em>
-              </h4>
-              <h2 style={{ marginTop: "20px" }}>OVERVIEW</h2>
-              <p>{overview}</p>
-              <div className="media_badges">
-                <a
-                  href={`https://www.imdb.com/title/${imdb_id}`}
-                  target="_blank"
-                  style={{ color: "black" }}
-                  rel="noreferrer"
-                >
-                  <SiImdb size={40} className="media_badge" />
-                </a>
-                <MdOutlineFavoriteBorder size={40} className="media_badge" />
-                <MdOutlineFavorite size={40} className="media_badge" />
-              </div>
-            </div>
-          </div>
-          <div className="cast_container">
-            <h2>TOP BILLED CAST</h2>
-            <div className="cast_container_cast">
-              {media.credits.map(({ name, character, profile_path, id }) => (
-                <PersonCard
-                  name={name}
-                  character={character}
-                  profile_path={profile_path}
-                  ID={id}
-                />
-              ))}
-            </div>
-          </div>
-        </>
-      )}
-    </>
-  );
+	return (
+		<>
+			{loading ? (
+				<h1>LOADING...</h1>
+			) : (
+				<>
+					<div
+						className="media_info"
+						style={
+							!loading && {
+								backgroundImage: `linear-gradient(0deg, rgba(255 255 255 / 94%), rgba(255 0 150 / 69%)), url(${BACKDROP_URL}${backdrop_path})`,
+								backgroundRepeat: "no-repeat",
+								backgroundSize: "cover"
+							}
+						}
+					>
+						<img
+							src={`${BASE_IMAGE_URL}${poster_path}`}
+							alt={title}
+							className="media_poster"
+						/>
+						<div className="media_info_text">
+							<h1>{`${title || name}`}</h1>
+							{genres &&
+								genres.map((genre) => <span>{` ${genre.name} `}</span>)}
+							<span>- {runtime} minutes</span>
+							<h4>
+								<em>{tagline}</em>
+							</h4>
+							<h2 style={{ marginTop: "20px" }}>OVERVIEW</h2>
+							<p>{overview}</p>
+							<div className="media_badges">
+								<a
+									href={`https://www.imdb.com/title/${imdb_id}`}
+									target="_blank"
+									style={{ color: "black" }}
+									rel="noreferrer"
+								>
+									<SiImdb size={40} className="media_badge" />
+								</a>
+								<MdOutlineFavoriteBorder size={40} className="media_badge" />
+								<MdOutlineFavorite size={40} className="media_badge" />
+							</div>
+						</div>
+					</div>
+					<div className="cast_container">
+						<h2>TOP BILLED CAST</h2>
+						<div className="cast_container_cast">
+							{media.credits.map(({ name, character, profile_path, id }) => (
+								<PersonCard
+									name={name}
+									character={character}
+									profile_path={profile_path}
+									ID={id}
+								/>
+							))}
+						</div>
+					</div>
+				</>
+			)}
+		</>
+	);
 };
 
 export default Media;
