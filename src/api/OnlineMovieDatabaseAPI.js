@@ -59,6 +59,12 @@ export const fetchPersonCredits = (person_id) => {
   ).then((res) => res.json());
 };
 
+export const fetchPersonSocials = (person_id) => {
+  return fetch(
+    `${BASE_URL}/person/${person_id}/external_ids?api_key=${API_KEY}&language=en-US`
+  ).then((res) => res.json());
+};
+
 //SEARCH
 
 export const movieSearch = (search_query) => {

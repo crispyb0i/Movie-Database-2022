@@ -1,12 +1,18 @@
 import {
   fetchPersonByID,
   fetchPersonCredits,
+  fetchPersonSocials,
 } from "../../api/OnlineMovieDatabaseAPI";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_IMAGE_URL, BACKDROP_URL } from "../../api/OnlineMovieDatabaseAPI";
 import "./Person.css";
 import MediaCard from "../../components/MediaCard/MediaCard";
+import { GrDomain } from "react-icons/gr";
+import { SiImdb } from "react-icons/si";
+import { FaFacebookF } from "react-icons/fa";
+import { BsInstagram } from "react-icons/bs";
+import { FiTwitter } from "react-icons/fi";
 
 const Person = () => {
   const [person, setPerson] = useState({});
@@ -20,6 +26,13 @@ const Person = () => {
             return { ...prev, combined_credits: credits };
           })
         )
+      )
+      .then(
+        fetchPersonSocials(personID).then((socials) => {
+          setPerson((prev) => {
+            return { ...prev, socials };
+          });
+        })
       )
       .then(() => setLoading(false));
   }, []);
@@ -39,6 +52,7 @@ const Person = () => {
     deathday,
     also_known_as,
     combined_credits,
+    socials,
   } = person;
 
   console.log(person);
@@ -56,9 +70,56 @@ const Person = () => {
                   ? `${BACKDROP_URL}/${profile_path}`
                   : `https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flittlesmilespa.org%2Fwp-content%2Fuploads%2F2016%2F08%2Fperson-placeholder-723x1024.png&f=1&nofb=1`
               }
-              alt={person.name}
+              alt={name}
             />
             <div className="left_panel_text">
+              <div className="socials">
+                {homepage && (
+                  <a href={homepage}>
+                    <GrDomain />
+                  </a>
+                )}
+                {imdb_id && (
+                  <a
+                    href={`https://www.imdb.com/name/${imdb_id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="social_icon"
+                  >
+                    <SiImdb size={35} />
+                  </a>
+                )}
+                {socials && socials.facebook_id && (
+                  <a
+                    href={`https://www.facebook.com/${person.socials.facebook_id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="social_icon"
+                  >
+                    <FaFacebookF size={35} />
+                  </a>
+                )}
+                {socials && socials.instagram_id && (
+                  <a
+                    href={`https://www.instagram.com/${person.socials.instagram_id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="social_icon"
+                  >
+                    <BsInstagram size={35} />
+                  </a>
+                )}
+                {socials && socials.twitter_id && (
+                  <a
+                    href={`https://www.twitter.com/${person.socials.twitter_id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="social_icon"
+                  >
+                    <FiTwitter size={35} />
+                  </a>
+                )}
+              </div>
               {birthday && (
                 <div className="left_info_section">
                   <h4>BIRTHDAY</h4>
@@ -81,7 +142,7 @@ const Person = () => {
                 <div className="left_info_section">
                   <h4>ALSO KNOWN AS</h4>
                   {also_known_as.map((name) => (
-                    <p>{name}</p>
+                    <p key={`aka-${name}`}>{name}</p>
                   ))}
                 </div>
               )}
@@ -99,8 +160,8 @@ const Person = () => {
               <div className="credits_container">
                 <h4>KNOWN FOR</h4>
                 <div className="credits">
-                  {combined_credits.cast.map((movie) => (
-                    <MediaCard media={movie} key={id} />
+                  {combined_credits.cast.map((credit) => (
+                    <MediaCard media={credit} />
                   ))}
                 </div>
               </div>

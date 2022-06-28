@@ -74,6 +74,9 @@ const Home = () => {
               type="text"
               className="home_search_input"
               onChange={inputChangeHandler}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") searchHandler();
+              }}
             />
             <button
               className="home_search_input_button"
@@ -84,44 +87,46 @@ const Home = () => {
           </div>
 
           {searchLoading ? (
-            <h1>LOADING...</h1>
+            <h1 style={{ textAlign: "center" }}>LOADING...</h1>
           ) : (
-            <div className="search_results_container">
-              <div className="search_results">
-                {searchResults.map((movie) => (
-                  <MediaCard media={movie} key={movie.id} />
-                ))}
+            <>
+              <div className="search_results_container">
+                <div className="search_results">
+                  {searchResults.map((movie) => (
+                    <MediaCard media={movie} key={movie.id} />
+                  ))}
+                </div>
               </div>
-            </div>
+
+              <div className="media_container">
+                <div className="container_header">
+                  <h1 className="container_title">Trending</h1>
+                  <button
+                    className="trending_time_button"
+                    onClick={buttonClickHandler}
+                    value={"day"}
+                    style={trendingTime === "day" ? selectedStyle : null}
+                  >
+                    DAY
+                  </button>
+                  <button
+                    className="trending_time_button"
+                    onClick={buttonClickHandler}
+                    value={"week"}
+                    style={trendingTime === "week" ? selectedStyle : null}
+                  >
+                    WEEK
+                  </button>
+                </div>
+
+                <div className="home_media_container">
+                  {trending.map((media) => (
+                    <MediaCard media={media} key={media.id} />
+                  ))}
+                </div>
+              </div>
+            </>
           )}
-
-          <div className="media_container">
-            <div className="container_header">
-              <h1 className="container_title">Trending</h1>
-              <button
-                className="trending_time_button"
-                onClick={buttonClickHandler}
-                value={"day"}
-                style={trendingTime === "day" ? selectedStyle : null}
-              >
-                DAY
-              </button>
-              <button
-                className="trending_time_button"
-                onClick={buttonClickHandler}
-                value={"week"}
-                style={trendingTime === "week" ? selectedStyle : null}
-              >
-                WEEK
-              </button>
-            </div>
-
-            <div className="home_media_container">
-              {trending.map((media) => (
-                <MediaCard media={media} key={media.id} />
-              ))}
-            </div>
-          </div>
         </>
       )}
     </div>

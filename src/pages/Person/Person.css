@@ -44,3 +44,15 @@
   /* width: 500px; */
   overflow: scroll;
 }
+
+.socials {
+  margin-bottom: 10px;
+}
+
+.social_icon {
+  margin-right: 10px;
+}
+
+.social_icon:link, .social_icon:visited{
+  color: black;
+}

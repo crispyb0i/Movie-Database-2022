@@ -57,6 +57,7 @@ const Media = (props) => {
     tagline,
     backdrop_path,
     genres,
+    credits,
   } = media;
 
   return (
@@ -76,7 +77,11 @@ const Media = (props) => {
             }
           >
             <img
-              src={`${BACKDROP_URL}/${poster_path}`}
+              src={
+                poster_path
+                  ? `${BACKDROP_URL}/${poster_path}`
+                  : `https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.autohub.ir%2Fstatic%2Fnewapi%2Fweb%2Fimg%2Fnot_found.png&f=1&nofb=1`
+              }
               alt={title}
               className="media_poster"
             />
@@ -104,19 +109,21 @@ const Media = (props) => {
               </div>
             </div>
           </div>
-          <div className="cast_container">
-            <h2>TOP BILLED CAST</h2>
-            <div className="cast_container_cast">
-              {media.credits.map(({ name, character, profile_path, id }) => (
-                <PersonCard
-                  name={name}
-                  character={character}
-                  profile_path={profile_path}
-                  ID={id}
-                />
-              ))}
+          {credits && credits.length > 0 && (
+            <div className="cast_container">
+              <h2>TOP BILLED CAST</h2>
+              <div className="cast_container_cast">
+                {media.credits.map(({ name, character, profile_path, id }) => (
+                  <PersonCard
+                    name={name}
+                    character={character}
+                    profile_path={profile_path}
+                    ID={id}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </>
       )}
     </>
