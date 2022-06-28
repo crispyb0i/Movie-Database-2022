@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
   fetchAllTrending,
-  movieSearch,
+  multiSearch,
 } from "../../api/OnlineMovieDatabaseAPI";
 import MediaCard from "../../components/MediaCard/MediaCard";
+import PersonCard from "../../components/PersonCard/PersonCard";
 import { FiSearch } from "react-icons/fi";
 import "./Home.css";
 
@@ -14,6 +15,7 @@ const Home = () => {
   const [inputValue, setInputValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
+  const [searchMode, setSearchMode] = useState("movie");
 
   useEffect(() => {
     fetchAllTrending("all", trendingTime)
@@ -30,9 +32,9 @@ const Home = () => {
 
   const searchHandler = () => {
     setSearchLoading(true);
-    movieSearch(inputValue)
+    multiSearch(inputValue)
       .then((data) => {
-        data.results.forEach((movie) => (movie.media_type = "movie"));
+        // data.results.forEach((movie) => (movie.media_type = "movie"));
         setSearchResults(data.results);
       })
       .then(() => setSearchLoading(false));
@@ -51,6 +53,8 @@ const Home = () => {
     // vote_average: 5.4
     // vote_count: 152
   };
+
+  console.log(searchResults);
 
   const buttonClickHandler = (e) => {
     setTrendingTime(e.target.value);
@@ -74,6 +78,7 @@ const Home = () => {
               type="text"
               className="home_search_input"
               onChange={inputChangeHandler}
+              placeholder="Search for movie, TV show, or person"
               onKeyPress={(e) => {
                 if (e.key === "Enter") searchHandler();
               }}
@@ -92,9 +97,14 @@ const Home = () => {
             <>
               <div className="search_results_container">
                 <div className="search_results">
-                  {searchResults.map((movie) => (
-                    <MediaCard media={movie} key={movie.id} />
-                  ))}
+                  {searchResults.map((result) => {
+                    if (
+                      result.media_type === "movie" ||
+                      result.media_type === "tv" ||
+                      result.media_type === "person"
+                    )
+                      return <MediaCard media={result} key={result.id} />;
+                  })}
                 </div>
               </div>
 

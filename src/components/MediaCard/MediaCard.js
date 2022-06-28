@@ -11,6 +11,7 @@ const MediaCard = (props) => {
     name,
     media_type,
     first_air_date,
+    profile_path,
   } = props.media;
 
   return (
@@ -18,8 +19,8 @@ const MediaCard = (props) => {
       <Link to={`/${media_type}/${id}`}>
         <img
           src={
-            poster_path
-              ? `${BASE_IMAGE_URL}${poster_path}`
+            poster_path || profile_path
+              ? `${BASE_IMAGE_URL}${poster_path || profile_path}`
               : `https://www.uip.dk/sites/default/files/styles/movie_image_poster/public/default_images/movie-poster-placeholder_8.png?itok=DQ8mgIwY`
           }
           alt={title}

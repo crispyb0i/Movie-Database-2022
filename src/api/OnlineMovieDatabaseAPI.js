@@ -67,9 +67,9 @@ export const fetchPersonSocials = (person_id) => {
 
 //SEARCH
 
-export const movieSearch = (search_query) => {
+export const multiSearch = (search_query) => {
   return fetch(
-    `${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${search_query}&page=1&include_adult=false`
+    `${BASE_URL}search/multi?api_key=${API_KEY}&language=en-US&query=${search_query}&page=1&include_adult=false`
   ).then((res) => res.json());
 };
 
