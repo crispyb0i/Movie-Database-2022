@@ -1,7 +1,12 @@
-import { fetchPersonByID } from "../../api/OnlineMovieDatabaseAPI";
+import {
+  fetchPersonByID,
+  fetchPersonCredits,
+} from "../../api/OnlineMovieDatabaseAPI";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { BASE_IMAGE_URL } from "../../api/OnlineMovieDatabaseAPI";
+import { BASE_IMAGE_URL, BACKDROP_URL } from "../../api/OnlineMovieDatabaseAPI";
+import "./Person.css";
+import MediaCard from "../../components/MediaCard/MediaCard";
 
 const Person = () => {
   const [person, setPerson] = useState({});
@@ -9,6 +14,13 @@ const Person = () => {
   useEffect(() => {
     fetchPersonByID(personID)
       .then((data) => setPerson(data))
+      .then(
+        fetchPersonCredits(personID).then((credits) =>
+          setPerson((prev) => {
+            return { ...prev, combined_credits: credits };
+          })
+        )
+      )
       .then(() => setLoading(false));
   }, []);
 
@@ -23,28 +35,75 @@ const Person = () => {
     known_for_department,
     place_of_birth,
     profile_path,
+    birthday,
+    deathday,
+    also_known_as,
+    combined_credits,
   } = person;
+
+  console.log(person);
 
   return (
     <>
       {loading ? (
         <h1>LOADING...</h1>
       ) : (
-        <div>
-          <img src={`${BASE_IMAGE_URL}${profile_path}`} alt={person.name} />
-          <div>
-            <h1>{name}</h1>
-            {place_of_birth && (
-              <>
-                <h4>PLACE OF BIRTH</h4>
-                <p>{place_of_birth}</p>
-              </>
-            )}
+        <div className="person_page_container">
+          <div className="left_panel">
+            <img
+              src={
+                profile_path
+                  ? `${BACKDROP_URL}/${profile_path}`
+                  : `https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flittlesmilespa.org%2Fwp-content%2Fuploads%2F2016%2F08%2Fperson-placeholder-723x1024.png&f=1&nofb=1`
+              }
+              alt={person.name}
+            />
+            <div className="left_panel_text">
+              {birthday && (
+                <div className="left_info_section">
+                  <h4>BIRTHDAY</h4>
+                  <p>{birthday}</p>
+                </div>
+              )}
+              {deathday && (
+                <div className="left_info_section">
+                  <h4>DATE OF DEATH</h4>
+                  <p>{deathday}</p>
+                </div>
+              )}
+              {place_of_birth && (
+                <div className="left_info_section">
+                  <h4>PLACE OF BIRTH</h4>
+                  <p>{place_of_birth}</p>
+                </div>
+              )}
+              {also_known_as.length > 0 && (
+                <div className="left_info_section">
+                  <h4>ALSO KNOWN AS</h4>
+                  {also_known_as.map((name) => (
+                    <p>{name}</p>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="right_panel">
+            <h1 className="person_name">{name}</h1>
             {biography && (
               <>
                 <h4>BIOGRAPHY</h4>
                 <p>{biography}</p>
               </>
+            )}
+            {combined_credits && (
+              <div className="credits_container">
+                <h4>KNOWN FOR</h4>
+                <div className="credits">
+                  {combined_credits.cast.map((movie) => (
+                    <MediaCard media={movie} key={id} />
+                  ))}
+                </div>
+              </div>
             )}
           </div>
         </div>

@@ -2,9 +2,9 @@
   height: 350px;
   width: 150px;
   margin-right: 15px;
-  border: 1px solid lightgray;
-  border-radius: 10px;
-  transition: all 1s;
+  transition: 0.8s all;
+  /* border: 1px solid lightgray;
+  border-radius: 10px; */
 }
 
 .person_container:hover {
@@ -23,6 +23,7 @@
 .person_image {
   width: 150px;
   height: 225px;
+  border-radius: 10px;
 }
 
 .person_text_container {

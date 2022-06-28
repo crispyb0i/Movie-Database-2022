@@ -10,22 +10,34 @@
 }
 
 .home_search_input_container {
-  display: inline;
+  display: flex;
+  flex-direction: row;
   width: 100%;
   height: 100px;
-  margin-bottom: 50px;
+  margin: 0 auto 50px;
+  width: 80%;
+}
+
+.home_search_input[type="text"] {
+  font-size: 25px;
 }
 
 .home_search_input {
   margin: auto;
-  width: 80%;
   height: 40px;
+  width: 100%;
+  padding: 10px;
+}
+
+.home_search_input_button {
+  height: 40px;
+  align-self: center;
 }
 
 .home_title {
   text-align: center;
   margin: 100px 0;
-  margin-bottom: 100px;
+  margin-bottom: 40px;
   font-size: 80px;
 }
 
@@ -38,6 +50,21 @@
   overflow: scroll;
   height: 400px;
   margin: auto;
+}
+
+.search_results_container {
+  text-align: center;
+}
+
+.search_results_container h1 {
+  margin-bottom: 50px;
+}
+
+.search_results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 100px;
 }
 
 .trending_time_button {

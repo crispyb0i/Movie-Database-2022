@@ -17,7 +17,11 @@ const MediaCard = (props) => {
     <div className="media_card_container">
       <Link to={`/${media_type}/${id}`}>
         <img
-          src={`${BASE_IMAGE_URL}${poster_path}`}
+          src={
+            poster_path
+              ? `${BASE_IMAGE_URL}${poster_path}`
+              : `https://www.uip.dk/sites/default/files/styles/movie_image_poster/public/default_images/movie-poster-placeholder_8.png?itok=DQ8mgIwY`
+          }
           alt={title}
           className="media_card_image"
         />

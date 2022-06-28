@@ -1,0 +1,46 @@
+.person_page_container {
+  display: flex;
+  justify-content: center;
+  margin: 50px auto 0;
+  width: 90%;
+}
+
+.person_name {
+  margin: 0 0 20px 0;
+}
+
+.left_panel {
+  width: 300px;
+  padding: 10px;
+  margin-right: 20px;
+}
+
+.left_info_section {
+  margin-bottom: 30px;
+}
+
+.left_panel img {
+  border-radius: 20px;
+  width: 280px;
+  margin-bottom: 10px;
+}
+
+.left_panel_text {
+  padding-left: 5px;
+}
+
+.right_panel {
+  width: calc(100vw - 80px - 300px);
+  max-width: 920px;
+  padding: 10px;
+}
+
+.credits_container {
+  margin-top: 50px;
+}
+
+.credits {
+  display: flex;
+  /* width: 500px; */
+  overflow: scroll;
+}

@@ -11,8 +11,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/:mediaType/:mediaID" element={<Media />} />
         <Route path="/person/:personID" element={<Person />} />
+        <Route path="/:mediaType/:mediaID" element={<Media />} />
         {/* <Route index element={<Home />} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
