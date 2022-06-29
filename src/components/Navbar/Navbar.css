@@ -4,6 +4,7 @@
   background-color: black;
   color: white;
   height: 50px;
+  width: 100vw;
 }
 
 .navbar_item {

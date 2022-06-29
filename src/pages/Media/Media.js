@@ -45,8 +45,6 @@ const Media = (props) => {
         .then(() => setLoading(false));
   }, []);
 
-  console.log(media);
-
   const {
     poster_path,
     title,

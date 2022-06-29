@@ -56,8 +56,6 @@ const Person = () => {
     socials,
   } = person;
 
-  console.log(person);
-
   return (
     <>
       {loading ? (
