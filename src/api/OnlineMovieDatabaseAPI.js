@@ -1,4 +1,4 @@
-const BASE_URL = `https://api.themoviedb.org/3/`;
+const BASE_URL = `https://api.themoviedb.org/3`;
 const API_KEY = process.env.REACT_APP_ONLINE_MOVIE_DATABASE_API_KEY;
 export const BASE_IMAGE_URL = `https://image.tmdb.org/t/p/w300`;
 export const BACKDROP_URL = `https://image.tmdb.org/t/p/original`;
@@ -69,7 +69,7 @@ export const fetchPersonSocials = (person_id) => {
 
 export const multiSearch = (search_query) => {
   return fetch(
-    `${BASE_URL}search/multi?api_key=${API_KEY}&language=en-US&query=${search_query}&page=1&include_adult=false`
+    `${BASE_URL}/search/multi?api_key=${API_KEY}&language=en-US&query=${search_query}&page=1&include_adult=false`
   ).then((res) => res.json());
 };
 
