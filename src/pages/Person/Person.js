@@ -76,8 +76,8 @@ const Person = () => {
             <div className="left_panel_text">
               <div className="socials">
                 {homepage && (
-                  <a href={homepage}>
-                    <GrDomain />
+                  <a href={homepage} className="social_icon_div">
+                    <GrDomain size={35} className="social_icon" />
                   </a>
                 )}
                 {imdb_id && (
@@ -85,9 +85,9 @@ const Person = () => {
                     href={`https://www.imdb.com/name/${imdb_id}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="social_icon"
+                    className="social_icon_div"
                   >
-                    <SiImdb size={35} />
+                    <SiImdb size={35} className="social_icon" />
                   </a>
                 )}
                 {socials && socials.facebook_id && (
@@ -95,9 +95,9 @@ const Person = () => {
                     href={`https://www.facebook.com/${person.socials.facebook_id}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="social_icon"
+                    className="social_icon_div"
                   >
-                    <FaFacebookF size={35} />
+                    <FaFacebookF size={35} className="social_icon" />
                   </a>
                 )}
                 {socials && socials.instagram_id && (
@@ -105,9 +105,9 @@ const Person = () => {
                     href={`https://www.instagram.com/${person.socials.instagram_id}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="social_icon"
+                    className="social_icon_div"
                   >
-                    <BsInstagram size={35} />
+                    <BsInstagram size={35} className="social_icon" />
                   </a>
                 )}
                 {socials && socials.twitter_id && (
@@ -115,9 +115,9 @@ const Person = () => {
                     href={`https://www.twitter.com/${person.socials.twitter_id}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="social_icon"
+                    className="social_icon_div"
                   >
-                    <FiTwitter size={35} />
+                    <FiTwitter size={35} className="social_icon" />
                   </a>
                 )}
               </div>
