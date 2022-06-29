@@ -13,6 +13,7 @@ import "./Media.css";
 import { SiImdb } from "react-icons/si";
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import PersonCard from "../../components/PersonCard/PersonCard";
+import { Oval } from "react-loading-icons";
 
 const Media = (props) => {
   const { mediaType, mediaID } = useParams();
@@ -63,7 +64,9 @@ const Media = (props) => {
   return (
     <>
       {loading ? (
-        <h1>LOADING...</h1>
+        <div className="loading_icon">
+          <Oval stroke="black" style={{ textAlign: "center" }} />
+        </div>
       ) : (
         <>
           <div

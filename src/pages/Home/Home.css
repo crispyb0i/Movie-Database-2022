@@ -41,6 +41,16 @@
   font-size: 80px;
 }
 
+.loading_icon {
+  text-align: center;
+  margin-top: 40vh;
+}
+
+.loading_icon_search {
+  text-align: center;
+  margin-top: 100px;
+}
+
 .container_title {
   margin-right: 20px;
 }

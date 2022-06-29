@@ -13,6 +13,7 @@ import { SiImdb } from "react-icons/si";
 import { FaFacebookF } from "react-icons/fa";
 import { BsInstagram } from "react-icons/bs";
 import { FiTwitter } from "react-icons/fi";
+import { Oval } from "react-loading-icons";
 
 const Person = () => {
   const [person, setPerson] = useState({});
@@ -60,7 +61,9 @@ const Person = () => {
   return (
     <>
       {loading ? (
-        <h1>LOADING...</h1>
+        <div className="loading_icon">
+          <Oval stroke="black" style={{ textAlign: "center" }} />
+        </div>
       ) : (
         <div className="person_page_container">
           <div className="left_panel">

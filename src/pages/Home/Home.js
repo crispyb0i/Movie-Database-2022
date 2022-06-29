@@ -5,6 +5,7 @@ import {
 } from "../../api/OnlineMovieDatabaseAPI";
 import MediaCard from "../../components/MediaCard/MediaCard";
 import { FiSearch } from "react-icons/fi";
+import { Oval } from "react-loading-icons";
 import "./Home.css";
 
 const Home = () => {
@@ -37,8 +38,6 @@ const Home = () => {
       .then(() => setSearchLoading(false));
   };
 
-  console.log(searchResults);
-
   const buttonClickHandler = (e) => {
     setTrendingTime(e.target.value);
   };
@@ -51,7 +50,9 @@ const Home = () => {
   return (
     <div className="home_container">
       {loading ? (
-        <h1>LOADING...</h1>
+        <div className="loading_icon">
+          <Oval stroke="black" style={{ textAlign: "center" }} />
+        </div>
       ) : (
         <>
           <h1 className="home_title">SHINFLIX</h1>
@@ -75,7 +76,9 @@ const Home = () => {
           </div>
 
           {searchLoading ? (
-            <h1 style={{ textAlign: "center" }}>LOADING...</h1>
+            <div className="loading_icon_search">
+              <Oval stroke="black" style={{ textAlign: "center" }} />
+            </div>
           ) : (
             <>
               <div className="search_results_container">
