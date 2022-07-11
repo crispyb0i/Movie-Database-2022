@@ -109,7 +109,11 @@ const Media = (props) => {
               <h1>{`${title || name}`}</h1>
               {genres &&
                 genres.map((genre) => <span>{` ${genre.name} `}</span>)}
-              <span>- {runtime} minutes</span>
+              {runtime && (
+                <span>
+                  {genres && <span>-</span>} {runtime} minutes
+                </span>
+              )}
               <h4>
                 <em>{tagline}</em>
               </h4>
@@ -124,8 +128,8 @@ const Media = (props) => {
                 >
                   <SiImdb size={40} className="media_badge" />
                 </a>
-                <MdOutlineFavoriteBorder size={40} className="media_badge" />
-                <MdOutlineFavorite size={40} className="media_badge" />
+                {/* <MdOutlineFavoriteBorder size={40} className="media_badge" />
+                <MdOutlineFavorite size={40} className="media_badge" /> */}
               </div>
             </div>
           </div>

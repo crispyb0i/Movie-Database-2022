@@ -38,18 +38,22 @@
 .right_panel .person_image_container .person_image_container_images {
   display: flex;
   overflow: scroll;
-  height: 500px;
+  height: 350px;
+}
+
+.right_panel .person_image_container {
+  margin-top:20px
 }
 
 .right_panel .person_image_container .person_image_container_images img {
   width: 200px;
   padding-right: 10px;
   transition: 1s all;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .right_panel .person_image_container .person_image_container_images img:hover {
-  transform: scale(1.1)
+  transform: scale(1.11)
 }
 
 .credits_container {

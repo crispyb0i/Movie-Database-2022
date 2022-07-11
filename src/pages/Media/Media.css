@@ -60,6 +60,10 @@
   margin: auto;
 }
 
+.media_info_text h4 {
+  margin-top: 5px;
+}
+
 .media_badges {
   margin-top: 20px;
 }

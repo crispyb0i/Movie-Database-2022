@@ -190,7 +190,7 @@ const Person = () => {
                       rel="noreferrer"
                     >
                       <img
-                        src={`${BACKDROP_URL}/${image.file_path}`}
+                        src={`${BASE_IMAGE_URL}/${image.file_path}`}
                         key={image.file_path}
                         alt={name}
                       />
