@@ -138,7 +138,7 @@ const Media = (props) => {
                 </div>
               </div>
             )}
-            {images.backdrops.length !== 0 && (
+            {images && images.backdrops.length !== 0 && (
               <div className="images_container">
                 <h2>IMAGES</h2>
                 <div className="images_container_images">
