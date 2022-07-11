@@ -31,14 +31,20 @@ export const fetchMovieImagesByID = (media_id) => {
 
 //SHOWS
 
-export const fetchShowByID = (show_id) => {
+export const fetchShowByID = (media_id) => {
   return fetch(
-    `${BASE_URL}/tv/${show_id}?api_key=${API_KEY}&language=en-US`
+    `${BASE_URL}/tv/${media_id}?api_key=${API_KEY}&language=en-US`
   ).then((res) => res.json());
 };
 
 export const fetchTVCreditsByID = (media_id) => {
   return fetch(`${BASE_URL}/tv/${media_id}/credits?api_key=${API_KEY}`).then(
+    (res) => res.json()
+  );
+};
+
+export const fetchTVImagesByID = (media_id) => {
+  return fetch(`${BASE_URL}/tv/${media_id}/images?api_key=${API_KEY}`).then(
     (res) => res.json()
   );
 };
@@ -68,6 +74,12 @@ export const fetchPersonCredits = (person_id) => {
 export const fetchPersonSocials = (person_id) => {
   return fetch(
     `${BASE_URL}/person/${person_id}/external_ids?api_key=${API_KEY}&language=en-US`
+  ).then((res) => res.json());
+};
+
+export const fetchPersonImages = (person_id) => {
+  return fetch(
+    `${BASE_URL}/person/${person_id}/images?api_key=${API_KEY}`
   ).then((res) => res.json());
 };
 

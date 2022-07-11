@@ -2,10 +2,12 @@ import {
   fetchPersonByID,
   fetchPersonCredits,
   fetchPersonSocials,
+  fetchPersonImages,
+  BACKDROP_URL,
+  BASE_IMAGE_URL,
 } from "../../api/OnlineMovieDatabaseAPI";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { BASE_IMAGE_URL, BACKDROP_URL } from "../../api/OnlineMovieDatabaseAPI";
 import "./Person.css";
 import MediaCard from "../../components/MediaCard/MediaCard";
 import { GrDomain } from "react-icons/gr";
@@ -35,6 +37,13 @@ const Person = () => {
           });
         })
       )
+      .then(
+        fetchPersonImages(personID).then((images) => {
+          setPerson((prevState) => {
+            return { ...prevState, images: images.profiles };
+          });
+        })
+      )
       .then(() => setLoading(false));
   }, []);
 
@@ -44,6 +53,7 @@ const Person = () => {
     name,
     biography,
     homepage,
+    images,
     id,
     imdb_id,
     known_for_department,
@@ -55,6 +65,8 @@ const Person = () => {
     combined_credits,
     socials,
   } = person;
+
+  console.log(images);
 
   return (
     <>
@@ -163,6 +175,26 @@ const Person = () => {
                 <div className="credits">
                   {combined_credits.cast.map((credit) => (
                     <MediaCard media={credit} />
+                  ))}
+                </div>
+              </div>
+            )}
+            {images && (
+              <div className="person_image_container">
+                <h2>Pictures</h2>
+                <div className="person_image_container_images">
+                  {images.map((image) => (
+                    <a
+                      href={`${BACKDROP_URL}/${image.file_path}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <img
+                        src={`${BACKDROP_URL}/${image.file_path}`}
+                        key={image.file_path}
+                        alt={name}
+                      />
+                    </a>
                   ))}
                 </div>
               </div>

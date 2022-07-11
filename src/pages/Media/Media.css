@@ -21,6 +21,10 @@
 
 /* .images_container {} */
 
+.images_container h2 {
+  margin-bottom: 15px;
+}
+
 .images_container img {
   width: 500px;
   padding: 0 15px 10px 0;

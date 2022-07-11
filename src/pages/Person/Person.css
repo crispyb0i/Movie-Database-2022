@@ -1,7 +1,7 @@
 .person_page_container {
   display: flex;
   justify-content: center;
-  margin: 50px auto 0;
+  margin: 50px auto 50px;
   width: 90%;
 }
 
@@ -33,6 +33,23 @@
   width: calc(100vw - 80px - 300px);
   max-width: 920px;
   padding: 10px;
+}
+
+.right_panel .person_image_container .person_image_container_images {
+  display: flex;
+  overflow: scroll;
+  height: 500px;
+}
+
+.right_panel .person_image_container .person_image_container_images img {
+  width: 200px;
+  padding-right: 10px;
+  transition: 1s all;
+  margin-top: 10px;
+}
+
+.right_panel .person_image_container .person_image_container_images img:hover {
+  transform: scale(1.1)
 }
 
 .credits_container {

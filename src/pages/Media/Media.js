@@ -6,6 +6,7 @@ import {
   fetchMovieCreditsByID,
   fetchMovieImagesByID,
   fetchTVCreditsByID,
+  fetchTVImagesByID,
   fetchShowByID,
   BACKDROP_URL,
 } from "../../api/OnlineMovieDatabaseAPI";
@@ -48,6 +49,13 @@ const Media = (props) => {
         .then(() => fetchTVCreditsByID(mediaID))
         .then((data) =>
           setMedia((prevState) => ({ ...prevState, credits: data.cast }))
+        )
+        .then(() => fetchTVImagesByID(mediaID))
+        .then((data) =>
+          setMedia((prevState) => ({
+            ...prevState,
+            images: { backdrops: data.backdrops },
+          }))
         )
         .then(() => setLoading(false));
   }, []);
@@ -94,6 +102,7 @@ const Media = (props) => {
                   : `https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.autohub.ir%2Fstatic%2Fnewapi%2Fweb%2Fimg%2Fnot_found.png&f=1&nofb=1`
               }
               alt={title}
+              key={poster_path}
               className="media_poster"
             />
             <div className="media_info_text">
@@ -148,7 +157,11 @@ const Media = (props) => {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <img src={`${BACKDROP_URL}/${image.file_path}`} />
+                      <img
+                        src={`${BACKDROP_URL}/${image.file_path}`}
+                        alt={title}
+                        key={image.file_path}
+                      />
                     </a>
                   ))}
                 </div>
