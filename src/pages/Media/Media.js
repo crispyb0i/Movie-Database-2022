@@ -4,9 +4,9 @@ import {
   fetchMovieByID,
   fetchMovieTrailersByID,
   fetchMovieCreditsByID,
+  fetchMovieImagesByID,
   fetchTVCreditsByID,
   fetchShowByID,
-  BASE_IMAGE_URL,
   BACKDROP_URL,
 } from "../../api/OnlineMovieDatabaseAPI";
 import "./Media.css";
@@ -31,6 +31,13 @@ const Media = (props) => {
         .then(() => fetchMovieCreditsByID(mediaID))
         .then((data) =>
           setMedia((prevState) => ({ ...prevState, credits: data.cast }))
+        )
+        .then(() => fetchMovieImagesByID(mediaID))
+        .then((data) =>
+          setMedia((prevState) => ({
+            ...prevState,
+            images: { posters: data.posters, backdrops: data.backdrops },
+          }))
         )
         .then(() => setLoading(false));
     }
@@ -57,7 +64,10 @@ const Media = (props) => {
     backdrop_path,
     genres,
     credits,
+    images,
   } = media;
+
+  console.log(images);
 
   return (
     <>
@@ -110,21 +120,41 @@ const Media = (props) => {
               </div>
             </div>
           </div>
-          {credits && credits.length > 0 && (
-            <div className="cast_container">
-              <h2>TOP BILLED CAST</h2>
-              <div className="cast_container_cast">
-                {media.credits.map(({ name, character, profile_path, id }) => (
-                  <PersonCard
-                    name={name}
-                    character={character}
-                    profile_path={profile_path}
-                    ID={id}
-                  />
-                ))}
+          <div className="media_details">
+            {credits && credits.length > 0 && (
+              <div className="cast_container">
+                <h2>TOP BILLED CAST</h2>
+                <div className="cast_container_cast">
+                  {media.credits.map(
+                    ({ name, character, profile_path, id }) => (
+                      <PersonCard
+                        name={name}
+                        character={character}
+                        profile_path={profile_path}
+                        ID={id}
+                      />
+                    )
+                  )}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+            {images.backdrops.length !== 0 && (
+              <div className="images_container">
+                <h2>IMAGES</h2>
+                <div className="images_container_images">
+                  {images.backdrops.map((image) => (
+                    <a
+                      href={`${BACKDROP_URL}/${image.file_path}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <img src={`${BACKDROP_URL}/${image.file_path}`} />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </>
       )}
     </>

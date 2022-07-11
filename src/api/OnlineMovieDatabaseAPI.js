@@ -23,6 +23,12 @@ export const fetchMovieCreditsByID = (media_id) => {
   );
 };
 
+export const fetchMovieImagesByID = (media_id) => {
+  return fetch(`${BASE_URL}/movie/${media_id}/images?api_key=${API_KEY}`).then(
+    (res) => res.json()
+  );
+};
+
 //SHOWS
 
 export const fetchShowByID = (show_id) => {
