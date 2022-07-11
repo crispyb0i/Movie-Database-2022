@@ -75,7 +75,7 @@ const Media = (props) => {
     images,
   } = media;
 
-  console.log(images);
+  console.log(genres);
 
   return (
     <>
@@ -111,7 +111,7 @@ const Media = (props) => {
                 genres.map((genre) => <span>{` ${genre.name} `}</span>)}
               {runtime && (
                 <span>
-                  {genres && <span>-</span>} {runtime} minutes
+                  {genres.length !== 0 && <span>-</span>} {runtime} minutes
                 </span>
               )}
               <h4>
