@@ -1,27 +1,29 @@
 .navbar_container {
-  display: flex;
-  list-style-type: none;
-  background-color: black;
-  color: white;
-  height: 50px;
-  width: 100vw;
+	display: flex;
+	list-style-type: none;
+	background-color: black;
+	color: white;
+	height: 50px;
+	width: 100vw;
+	position: sticky;
+	top: 0;
 }
 
 .navbar_item {
-  margin: auto 20px;
+	margin: auto 20px;
 }
 
 .navbar_items_left {
-  display: flex;
-  width: 50%;
+	display: flex;
+	width: 50%;
 }
 
 .navbar_items_right {
-  display: flex;
-  justify-content:flex-end;
-  width: 50%;
+	display: flex;
+	justify-content: flex-end;
+	width: 50%;
 }
 
 .navbar_container logo {
-  color: red;
+	color: red;
 }
